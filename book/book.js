@@ -8,6 +8,7 @@ var bookSchema = mongoose.Schema({
 });
 
 var BookModel = mongoose.model("book", bookSchema);
+var Categoryservice = require('./../category/category-service');
 
 var baseUrl = '/api/book';
 
@@ -21,7 +22,7 @@ module.exports = function(app) {
             return;
         }
         
-        app.categoryModel.find({name:categoryName}, function(err, result) {
+        Categoryservice.categoryModel.find({name:categoryName}, function(err, result) {
             if (!result || result.length < 1) {
                 res.status(500).send("Category supplied not found");
                 return;   

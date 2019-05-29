@@ -51,13 +51,13 @@ module.exports.getPeginatedCategory = (req, res) => {
         query.skip = (pageNo*pageSize);
         query.limit = parseInt(pageSize);
         query.sort = {_id : -1}
-        
         CategoryModel.find({},["name", "description"], query, function(err, data) {
             if (err) {
                 console.log("Error occurred due to " + err);
                 res.status(500).send("Database error occurred");   
                 return;
             }
+            debugger;
             console.log("Fetched data is " + JSON.stringify(data));
             paginatedResult.content = data;
             CategoryModel.count({}, function(err, count) {
@@ -74,3 +74,5 @@ module.exports.getPeginatedCategory = (req, res) => {
             });      
         })
 }
+
+module.exports.categoryModel = CategoryModel;
